@@ -1,0 +1,17 @@
+.toggle_dropdown_list.active {
+    display: flex;
+}
+
+.show-menu {
+    left: 0;
+}
+
+
+.table-images{
+    width: 100px;
+}
+
+.edit-image{
+    width: 200px;
+   
+}

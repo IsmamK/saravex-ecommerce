@@ -1,0 +1,103 @@
+{% extends 'layout.html' %}
+{% block title %}{{ category_title }} - Saravex{% endblock %}
+
+{% block content %}
+<main>
+    <section class="shop_section py_1_75">
+        <div class="container">
+            <div class="row gap_1_md">
+                <!-- Side filter section -->
+                <div class="side_filter_section grid col_12 col_md_5 col_lg_4 gap_0_75 h_max" id="side-filter-section">
+                    <!-- Category filter -->
+                    <div class="category_filter b_shadow p_1 p_1_5_lg radius_0_5">
+                        <h6 class="mb_0_5 mb_0_75_lg">Product Categories</h6>
+
+                        <a href="{% url 'index' %}" class="flex justify_start align_center gap_0_5 mb_0_5">
+                            <p>All Products</p>
+                        </a>
+
+                        <div class="flex flex_col justify_start align_start gap_0_25">
+                            {% for category in categories %}
+                                <a href="{% url 'category_products' category.name %}" class="flex justify_start align_center gap_0_5">
+                                    <p>{{ category.name }} ({{ category.product_count }})</p>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product section -->
+                <div class="col_12 col_md_7 col_lg_8">
+                    <!-- Category title -->
+                    <div class="bg_light radius_0_5 p_1 px_1_5_lg mb_0_5">
+                        <h5 class="mb_0_25">{{ category_title }}</h5>
+                        <p class="text_light font_12 font_14_lg">Total {{ paginator.count }} products found</p>
+                    </div>
+
+                    <!-- Products grid -->
+                    <div class="row gap_0_75_md gap_1_lg mb_0_5 mb_1_5_lg">
+                        {% for product in page_obj %}
+                            <div class="col_6 col_lg_4">
+                                <div class="card radius_1 hidden h_100">
+                                    <div class="card_content">
+                                        <img src="{{ MEDIA_URL }}{{ product.image }}" alt="{{ product.name }}">
+                                    </div>
+
+                                    <div class="card_data p_0_75 align_self_center_lg">
+                                        <h6 class="mb_0_5">{{ product.name }}</h6>
+                                        <p class="text_secondary">{{ product.category }}</p>
+
+                                        <div class="flex gap_0_25">
+                                            <div class="flex flex_wrap justify_start gap_0_25 mb_0_25">
+                                                <div class="font_10 font_semi p_0_25 radius_0_25 {% if product.status == 'In Stock' %}bg_success text_success{% else %}bg_danger text_danger{% endif %}">
+                                                    {{ product.status }}
+                                                </div>
+                                            </div>
+
+                                            <span class="font_12 font_medium">Sold | {{ product.sold }}</span>
+                                        </div>
+
+                                        <div class="flex">
+                                            <div class="product_price font_semi">{{ product.price }}</div>
+
+                                            {% if product.status == 'In Stock' %}
+                                                <button class="card_btn btn radius_0_5">
+                                                    <i class="fa-solid fa-basket-shopping"></i>
+                                                    <span>Add</span>
+                                                </button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Products pagination -->
+                    <div class="products_pagination flex flex_wrap justify_center gap_0_25">
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}" class="bg_secondary bg_tartiary_hover p_0_25 px_0_5_lg radius_0_25">
+                                <i class="fa-solid fa-angle-left"></i>
+                            </a>
+                        {% endif %}
+
+                        {% for page_num in paginator.page_range %}
+                            {% if page_obj.number == page_num %}
+                                <span class="bg_primary text_light px_0_5 py_0_25 radius_0_25">{{ page_num }}</span>
+                            {% else %}
+                                <a href="?page={{ page_num }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}" class="bg_secondary bg_tartiary_hover px_0_5 py_0_25 radius_0_25">{{ page_num }}</a>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}" class="bg_secondary bg_tartiary_hover p_0_25 px_0_5_lg radius_0_25">
+                                <i class="fa-solid fa-angle-right"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

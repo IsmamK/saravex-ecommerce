@@ -1,0 +1,96 @@
+{% extends 'dashboard-layout.html' %}
+
+{% block title %}Saravex Admin - Edit Product{% endblock %}
+
+{% block content %}
+<div>
+    <h2 class="text-2xl font-semibold mb-6">Edit Product</h2>
+
+    {% if error %}
+        <div class="bg-red-500 text-white p-3 rounded-md mb-4">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form action="{% url 'edit-product' product.id %}" method="post" enctype="multipart/form-data" class="grid md:grid-cols-2 gap-4">
+        {% csrf_token %}
+        <div class="grid gap-1">
+            <label for="name">Product Name</label>
+            <input
+                type="text"
+                name="name"
+                id="name"
+                class="outline-none bg-slate-50 px-5 py-2 rounded-md"
+                value="{{ product.name }}"
+            />
+        </div>
+
+        <div class="grid gap-1">
+            <label for="price">Product Price</label>
+            <input
+                type="text"
+                name="price"
+                id="price"
+                class="outline-none bg-slate-50 px-5 py-2 rounded-md"
+                value="{{ product.price }}"
+            />
+        </div>
+
+        <div class="grid gap-1">
+            <label for="stock_status">Product Stock</label>
+            <select
+                name="stock_status"
+                id="stock_status"
+                class="outline-none bg-slate-50 px-5 py-2 rounded-md"
+            >
+                <option value="in_stock" {% if product.stock_status == 'in_stock' %}selected{% endif %}>In Stock</option>
+                <option value="out_of_stock" {% if product.stock_status == 'out_of_stock' %}selected{% endif %}>Out of Stock</option>
+            </select>
+        </div>
+
+        <div class="grid gap-1">
+            <label for="category">Product Category</label>
+            <select
+                name="category"
+                id="category"
+                class="outline-none bg-slate-50 px-5 py-2 rounded-md"
+            >
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category.id == product.category.id %}selected{% endif %}>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="grid gap-1 md:col-span-2">
+            <label for="description">Product Description</label>
+            <textarea
+                name="description"
+                id="description"
+                class="outline-none bg-slate-50 px-5 py-2 rounded-md"
+            >{{ product.description }}</textarea>
+        </div>
+
+        <div class="grid gap-1 md:col-span-2">
+            <label for="image">Product Image</label>
+            <div class="flex items-center gap-4">
+                <img src="{{ product.image.url }}" alt="Current product image" class="edit-image w-10 h-10 object-cover rounded-md">
+                <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    class="outline-none bg-slate-50 px-5 py-2 rounded-md"
+                />
+            </div>
+        </div>
+
+        <div>
+            <button
+                type="submit"
+                class="bg-slate-800 text-white px-5 py-2 rounded-lg flex"
+            >
+                Save
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

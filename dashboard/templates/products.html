@@ -1,0 +1,138 @@
+       
+{% extends 'dashboard-layout.html' %}
+
+{% block title %}Saravex Admin - Categories{% endblock %}
+
+{% block content %}
+
+            <!-- contents -->
+            <div>
+                <div class="flex mb-8">
+                    <a
+                        href="{%url 'add-product'%}"
+                        class="bg-slate-800 text-white px-3 py-1 rounded-lg flex"
+                    >
+                        Add Products
+                    </a>
+                </div>
+
+                <div>
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b">
+                                <th>SI</th>
+                                <th class="text-left">Image</th>
+                                <th class="text-left">Name</th>
+                                <th class="text-left">Category</th>
+                                <th class="text-left">Price</th>
+                                <th class="text-left">Description</th>
+                                <th class="text-left">Stock</th>
+                                <th class="text-left">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for product in products %}
+                            <tr class="hover:bg-slate-50 border-b">
+                                <td class="text-center px-2 py-1">{{forloop.counter}}</td>
+                                <td class="px-2 py-1"><img src = "{{product.image}}" class = "table-images"></td>
+                                <td class="px-2 py-1">{{product.name}}</td>
+                                <td class="px-2 py-1">{{product.category.name}}</td>
+                                <td class="px-2 py-1">{{product.price}}</td>
+                                <td class="px-2 py-1">{{product.description}}</td>
+                                <td class="px-2 py-1">{{product.stock_status}}</td>
+                                <td class="px-2 py-1">
+                                    <div class="flex gap-2 items-center">
+                                        <a
+                                            href="{% url 'edit-product' product.id %}"
+                                            class="bg-slate-800 text-white px-3 py-1 rounded-lg flex"
+                                        >
+                                            Edit
+                                        </a>
+        
+                                        <!-- Delete button in table -->
+                                        <button
+                                            data-modal-target="#deleteModal{{ forloop.counter }}"
+                                            data-category-id="{{ category.id }}"
+                                            class="bg-slate-800 text-white px-3 py-1 rounded-lg flex"
+                                            onclick="openModal(this)"
+                                        >
+                                            Delete
+                                        </button>
+        
+                                        <!-- Modal -->
+        
+                                        <div
+                                            class="modal_container fixed w-full h-full z-20 top-0 left-0 grid items-center justify-center invisible opacity-0 transition-all duration-300"
+                                            id="deleteModal{{ forloop.counter }}"
+                                        >
+                                            <div class="absolute w-full h-full bg-black/70 top-0 left-0"></div>
+                                            <div
+                                                class="modal_content relative bg-white px-8 py-10 transition-all rounded-xl max-w-md mx-auto"
+                                            >
+                                                <div
+                                                    class="w-8 h-8 flex justify-center items-center text-white bg-slate-700 rounded cursor-pointer absolute top-6 right-6"
+                                                    title="Close"
+                                                    data-close-button
+                                                >
+                                                    <i class="bi bi-x"></i>
+                                                </div>
+        
+                                                <h4 class="text-xl font-semibold">Confirm Deletion</h4>
+        
+                                                <div class="modal_body mt-4">
+                                                    <p>Are you sure you want to delete this category?</p>
+                                                    <div class="flex items-center gap-2 mt-4">
+                                                        <button
+                                                            class="px-3 py-1 bg-red-500 text-white rounded"
+                                                            data-close-button
+                                                        >
+                                                            Cancel
+                                                        </button>
+        
+                                                        <form action="{% url 'delete-product' product.id %}" method="post">
+                                                            {% csrf_token %}
+                                                            <button type="submit" class="px-3 py-1 bg-green-500 text-white rounded">
+                                                                Confirm
+                                                            </button>
+                                                        </form>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+    {% endblock %}
+
+{% block extra_js %}
+    <script>
+        // Open modal function
+        function openModal(button) {
+            const targetSelector = button.getAttribute('data-modal-target');
+            const modal = document.querySelector(targetSelector);
+            if (modal) {
+                modal.classList.remove('invisible', 'opacity-0');
+                modal.classList.add('visible', 'opacity-100');
+            }
+        }
+    
+        // Close modal function
+        document.querySelectorAll('[data-close-button]').forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = button.closest('.modal_container');
+                if (modal) {
+                    modal.classList.add('invisible', 'opacity-0');
+                    modal.classList.remove('visible', 'opacity-100');
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

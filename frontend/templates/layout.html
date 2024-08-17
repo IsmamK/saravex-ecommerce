@@ -1,0 +1,492 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--======== google fonts ========-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!--======== fonts awesome ========-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!--======== swiper css ========-->
+    <link rel="stylesheet" href="{% static 'css/swiper.css' %}">
+
+    <!--======== style css ========-->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!--======== style css ========-->
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+
+    <!--======== custom css ========-->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    
+    <title>{% block title %}{% endblock %}</title>
+
+    {% block extra_head %}
+    <!-- Extra head content can be added by child templates -->
+    {% endblock %}
+</head>
+<body>
+
+    
+<!--======== header ========-->
+<header class="header">
+    <!--======== topbar ========-->
+    <div class="topbar bg_secondary display_none_lg">
+        <div class="container py_0_5">
+            <div class="flex">
+                <div class="toggle_dropdown language_switch">
+                    <div class="toggle_btn language_switch_btn">
+                        <img src="images/uk-symbol.png" alt="" class="toggle_btn_trigger">
+                        <span class="toggle_btn_trigger">English</span>
+                        <i class="fa-solid fa-caret-down toggle_btn_trigger"></i>
+                    </div>
+                    
+                    <div class="toggle_dropdown_list language_switch_list">
+                        <a href="#">
+                            <img src="images/uk-symbol.png" alt="">
+                            <span>English</span>
+                        </a>
+                        <a href="#">
+                            <img src="images/uae-symbol.png" alt="">
+                            <span>Bangla</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="topbar_info font_semi font_16">Support: 01765375500</div>
+            </div>
+        </div>
+    </div>
+
+    <!--======== main header ========-->
+    <div class="main_header bg_primary">
+        <div class="container py_0_5">
+            <div class="flex">
+                <div class="flex gap_1_25_lg">
+                    <!--======== menu toggle button ========-->
+                    <div class="nav_toggle font_20 pr_0_75 display_none_lg" id="nav-toggle">
+                        <i class="fa-solid fa-bars nav_toggle_trigger"></i>
+                    </div>
+
+                    <!--======== sidebar menu ========-->
+                    <div class="nav_menu position_relative display_none_lg" id="nav-menu">
+                        <!-- nav close -->
+                        <div class="nav_close flex justify_center position_absolute" id="nav-close">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </div>
+
+                        <!-- sign in -->
+                        <div class="sidebar_signin flex justify_start col_gap_0_75 bg_secondary px_1_5 py_1">
+                            <div class="sidebar_sign_content font_20">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+
+                            <div class="sidebar_sign_data font_18">Hello, sign in</div>
+                        </div>
+
+                        <!-- pages -->
+                        <div class="sidebar_menu y_scroll thin_scrollbar">
+                            <!-- main pages -->
+                            <div class="sidebar_main_pages">
+                                <p class="font_18 font_semi px_1_5 pt_1 pb_0_5">Main Pages</p>
+
+                                <ul class="flex flex_col">
+                                    <li class="w_100">
+                                        <a href="#" class="flex px_1_5 py_1">
+                                            <span>Home</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="w_100">
+                                        <a href="#" class="flex px_1_5 py_1">
+                                            <span>All Products</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="w_100">
+                                        <a href="#" class="flex px_1_5 py_1">
+                                            <span>Wishlist</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="w_100">
+                                        <a href="#" class="flex px_1_5 py_1">
+                                            <span>Compare</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- categories pages -->
+                            <div class="sidebar_main_pages">
+                                <p class="font_18 font_semi px_1_5 pt_1 pb_0_5">Categories</p>
+
+                                <ul class="flex flex_col">
+                                    <li class="w_100">
+                                        <a href="#" class="flex px_1_5 py_1">
+                                            <span>Men's Fashion</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="w_100">
+                                        <a href="#" class="flex px_1_5 py_1">
+                                            <span>Women's Fashion</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="w_100">
+                                        <a href="#" class="flex px_1_5 py_1">
+                                            <span>Kids Fashion</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="w_100">
+                                        <a href="#" class="flex px_1_5 py_1">
+                                            <span>Shoes</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="w_100">
+                                        <a href="#" class="flex px_1_5 py_1">
+                                            <span>Gadgets</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="w_100">
+                                        <a href="#" class="flex px_1_5 py_1">
+                                            <span>Grocery</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="w_100">
+                                        <a href="#" class="flex px_1_5 py_1">
+                                            <span>Sunglass</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="w_100">
+                                        <a href="#" class="flex px_1_5 py_1">
+                                            <span>Jwellery</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="w_100">
+                                        <a href="#" class="flex px_1_5 py_1">
+                                            <span>Perfume</span>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--======== logo ========-->
+                    <a href="#" class="nav_logo">
+                        <img src="images/logo.png" alt="">
+                    </a>
+
+                    <!--===== location =====-->
+                    <button class="location_btn display_none display_flex_lg flex align_end gap_0_25 font_12 font_medium" data-modal-target="#location-modal">
+                        <i class="fa-solid fa-location-dot font_18"></i>
+                        <div>
+                            Deliver to<br>
+                            <span class="font_14">Bangladesh</span>
+                        </div>
+                    </button>
+
+                    <!--===== location modal =====-->
+                    <div class="modal_container" id="location-modal">
+                        <div class="modal_background"></div>
+                        <div class="modal_content">
+                            <div class="modal_close button_hover close_modal" title="Close" data-close-button><i class="fa-solid fa-xmark"></i></div>
+                
+                            <h4 class="modal_title">Select Delivery Address</h4>
+                
+                            <div class="modal_body">
+                                <div class="radius_0_25 hidden">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116833.95338886736!2d90.41968899999999!3d23.7808405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka!5e0!3m2!1sen!2sbd!4v1704097224869!5m2!1sen!2sbd" width="100%" height="" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+
+                                <button class="btn bg_tartiary radius_0_25 mt_1">Confirm Location</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--======== desktop searchbar ========-->
+                    <div class="display_none display_block_lg">
+                        <form action="" method="post" class="search_form grid gap_0_5 radius_0_5">
+                            <div class="header_search_select flex gap_0_25 px_0_5">
+                                <div class="select_box">
+                                    <div class="option_selected">
+                                        All
+                                    </div>
+                                    <div class="option_container">
+                                        <div class="option_search">
+                                            <input type="text" name="" placeholder="Search...">
+                                        </div>
+                            
+                                        <div class="option">
+                                            <input type="radio" name="" id="men-fashion" class="option_radio">
+                                            <label for="men-fashion">Men's Fashion</label>
+                                        </div>
+                                        <div class="option">
+                                            <input type="radio" name="" id="women-fashion" class="option_radio">
+                                            <label for="women-fashion">Women's Fashion</label>
+                                        </div>
+                                        <div class="option">
+                                            <input type="radio" name="" id="kid-fashion" class="option_radio">
+                                            <label for="kid-fashion">Kids Fashion</label>
+                                        </div>
+                                        <div class="option">
+                                            <input type="radio" name="" id="grocery" class="option_radio">
+                                            <label for="grocery">Grocery</label>
+                                        </div>
+                                        <div class="option">
+                                            <input type="radio" name="" id="gadget" class="option_radio">
+                                            <label for="gadget">Gadgets</label>
+                                        </div>
+                                        <div class="option">
+                                            <input type="radio" name="" id="shoe" class="option_radio">
+                                            <label for="shoe">Shoes</label>
+                                        </div>
+                                        <div class="option">
+                                            <input type="radio" name="" id="jwellary" class="option_radio">
+                                            <label for="jwellary">Jwellary</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-caret-down toggle_btn_trigger"></i>
+                            </div>
+
+                            <input type="email" name="" id="" class="px_1 py_0_5" placeholder="Search Savarex">
+            
+                            <button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="flex gap_0_75 gap_1_25_lg">
+                    <!--===== sign in =====-->
+                    <a href="#" class="flex gap_0_5 header_signin_btn display_none_lg">
+                        <span>Sign in</span>
+                        <span class="font_20"><i class="fa-regular fa-user"></i></span>
+                    </a>
+
+                    <!--===== language switch =====-->
+                    <div class="toggle_dropdown language_switch display_none display_block_lg">
+                        <div class="toggle_btn language_switch_btn">
+                            <img src="images/uk-symbol.png" alt="" class="toggle_btn_trigger">
+                            <span class="toggle_btn_trigger">EN</span>
+                            <i class="fa-solid fa-caret-down toggle_btn_trigger"></i>
+                        </div>
+                        
+                        <div class="toggle_dropdown_list language_switch_list">
+                            <a href="#">
+                                <img src="images/uk-symbol.png" alt="">
+                                <span>EN</span>
+                            </a>
+                            <a href="#">
+                                <img src="images/uae-symbol.png" alt="">
+                                <span>BN</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!--===== desktop sign in =====-->
+                    <a href="#" class="display_none display_block_lg font_12 font_medium">
+                        Hello, sign in<br>
+                        <span class="font_14">Your Account</span>
+                    </a>
+
+                    <!--===== return =====-->
+                    <a href="#" class="display_none display_block_lg font_12 font_medium">
+                        Returns<br>
+                        <span class="font_14">& Orders</span>
+                    </a>
+
+                    <!--===== cart =====-->
+                    <a href="#" class="nav_cart font_20">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container display_none_lg">
+            <form action="" method="post" class="mobile_search_form grid gap_0_5 hidden radius_0_5">
+                <input type="email" name="" id="" class="px_1 py_0_5" placeholder="Search Savarex">
+
+                <button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
+
+        <div class="container py_0_75 x_scroll no_scrollbar display_none_lg">
+            <ul class="w_max font_16 flex gap_0_75">
+                <li><a href="#">All Products</a></li>
+                <li><a href="">Featured</a></li>
+                <li><a href="">Best Seller</a></li>
+                <li><a href="">Men's Fashion</a></li>
+                <li><a href="">Women's Fashion</a></li>
+                <li><a href="">Kids Fashion</a></li>
+                <li><a href="">Gadgets</a></li>
+                <li><a href="">Grocery</a></li>
+                <li><a href="">Shoes</a></li>
+                <li><a href="">Jwellary</a></li>
+                <li><a href="">Perfume</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!--======== secondary header ========-->
+    <div class="secondary_header bg_secondary">
+        <div class="container py_0_75 display_none display_block_lg">
+            <ul class="flex_lg justify_start_lg gap_1_25_lg">
+                <li><a href="">Home</a></li>
+                <li><a href="">All Product</a></li>
+                <li><a href="">Wishlist</a></li>
+                <li><a href="">Compare</a></li>
+                <li><a href="">About Us</a></li>
+                <li><a href="">Contact Us</a></li>
+            </ul>
+        </div>
+        
+        <div class="container py_0_75 display_none_lg">
+            <button class="location_btn flex justify_start gap_0_25" data-modal-target="#location-modal">
+                <i class="fa-solid fa-location-dot font_18"></i>
+                <span>Deliver to Bangladesh</span>
+                <i class="fa-solid fa-caret-down"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!--======== main content ========-->
+<main>
+    {% block content %}
+        <!-- Content from child templates will go here -->
+    {% endblock %}
+</main>
+
+<!--======== footer ========-->
+<footer class="footer bg_secondary">
+    <!--======== main footer ========-->
+    <div class="main_footer">
+        <div class="container py_2_5">
+            <div class="row gap_1_25_lg">
+                <div class="col_12 col_sm_6 col_lg_3">
+                    <div class="footer_logo mb_1_25">
+                        <img src="images/logo.png" alt="">
+                    </div>
+
+                    <div class="footer_data">
+                        <p class="mb_1_25">Saravex Hypermarket, the retail division of the multidimensional and multinational Saravex Group International has always been known as a trend setter of the retail industry in the region</p>
+
+                        <p class="mb_1 pl_0_75">
+                            <a href="tel:+8801765375500">Phone: 01765375500</a>
+                        </p>
+                        <p class="mb_1 pl_0_75">
+                            <a href="mailto:contact@saravexhypermarket.com">contact@saravexhypermarket.com</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col_12 col_sm_6 col_lg_2">
+                    <div class="footer_subtitle text_upper font_bold font_16 mb_1_25">top categories</div>
+
+                    <ul class="footer_menu_list flex flex_col align_start row_gap_1 mb_1_25">
+                        <li><a href="#">Grocery</a></li>
+                        <li><a href="#">Men's Fashion</a></li>
+                        <li><a href="#">Women's Fashion</a></li>
+                        <li><a href="#">Kids Fashion</a></li>
+                        <li><a href="#">Health & Beauty</a></li>
+                        <li><a href="#">Home & Lifestyle</a></li>
+                    </ul>
+                </div>
+
+                <div class="col_12 col_sm_4 col_lg_2">
+                    <div class="footer_subtitle text_upper font_bold font_16 mb_1_25">know us</div>
+
+                    <ul class="footer_menu_list flex flex_col align_start row_gap_1 mb_1_25">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Feedback</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">News & Events</a></li>
+                        <li><a href="#">Order Tracking</a></li>
+                    </ul>
+                </div>
+
+                <div class="col_12 col_sm_4 col_lg_2">
+                    <div class="footer_subtitle text_upper font_bold font_16 mb_1_25">policies</div>
+
+                    <ul class="footer_menu_list flex flex_col align_start row_gap_1 mb_1_25">
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">Service & Warranty</a></li>
+                    </ul>
+                </div>
+
+                <div class="col_12 col_sm_4 col_lg_3">
+                    <div class="footer_subtitle text_upper font_bold font_16 mb_1_25">available on</div>
+
+                    <div class="flex flex_col align_start row_gap_1_25 mb_1_25">
+                        <img src="images/google-play.svg" alt="" class="footer_img">
+                        <img src="images/app-store.svg" alt="" class="footer_img">
+                    </div>
+
+                    <div class="footer_subtitle text_capital font_bold font_16 mb_1_25">social links:</div>
+
+                    <ul class="footer_social_list flex flex_wrap_sm justify_start gap_0_5">
+                        <li><a href="#" class="flex justify_center bg_tartiary"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="#" class="flex justify_center bg_tartiary"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="#" class="flex justify_center bg_tartiary"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="#" class="flex justify_center bg_tartiary"><i class="fa-brands fa-youtube"></i></a></li>
+                        <li><a href="#" class="flex justify_center bg_tartiary"><i class="fa-brands fa-pinterest"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--======== bottom footer ========-->
+    <div class="bottom_footer">
+        <div class="container py_1_25">
+            <div class="flex flex_col flex_row_lg align_center">
+                <p class="text_center mb_0_75 mb_0_lg">Copyright © 2022 <a href="#">Saravex Hypermarket</a> | All rights reserved.</p>
+    
+                <img src="images/footer-pay.png" alt="" class="bottom_footer_img">
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--======== swiper js ========-->
+<script src="{% static 'js/swiper.js'%}"></script>
+
+<!--======== main js ========-->
+<script src="{% static 'js/main.js'%}"></script>
+
+{% block extra_js %}
+<!-- Extra JavaScript files can be included by child templates -->
+{% endblock %}
+</body>
+</html>

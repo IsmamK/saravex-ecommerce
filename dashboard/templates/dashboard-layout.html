@@ -1,0 +1,131 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
+
+        <link rel="stylesheet" href="{% static 'css2/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'css2/custom.css' %}" />
+
+        <title>{% block title %}{% endblock %}</title>
+
+        {% block extra_head %}
+        <!-- Extra head content can be added by child templates -->
+        {% endblock %}
+
+    </head>
+    <body>
+        <!-- sidebar -->
+        <div
+            class="nav__menu w-[300px] h-full fixed top-0 -left-[300px] lg:left-0 bg-slate-100 px-10 py-6 transition-all z-50"
+            id="nav-menu"
+        >
+            <h2 class="text-4xl font-bold mb-8">Saravex</h2>
+
+            <!-- nav close -->
+            <i
+                class="bi bi-x-square-fill text-3xl leading-4 absolute top-0 right-0 cursor-pointer lg:hidden"
+                id="nav-close"
+            ></i>
+
+            <!-- menu -->
+            <div class="flex flex-col gap-3 text-lg">
+                <a
+                    href="{% url 'dashboard' %} "
+                    class="nav_link block hover:text-green-500"
+                >
+                    Dashboard
+                </a>
+
+
+                <a
+                    href="{% url 'categories' %}"
+                    class="nav_link block hover:text-green-500"
+                >
+                    Categories
+                </a>
+
+                <a
+                    href="{% url 'products'%}"
+                    class="nav_link block hover:text-green-500"
+                >
+                   Products
+                </a>
+
+    
+                <a
+                    href="{% url 'orders' %}"
+                    class="nav_link block hover:text-green-500"
+                >
+                    Orders
+                </a>
+            </div>
+        </div>
+
+
+        <div class="px-5 lg:ml-[300px]">
+            <!-- topbar -->
+            <div>
+                <div class="flex justify-between items-center py-2">
+                    <div>
+                        <!-- nav toggle btn -->
+                        <i
+                            class="bi bi-list text-3xl cursor-pointer lg:hidden"
+                            id="nav-toggle"
+                        ></i>
+                    </div>
+
+                    <!-- user dropdown -->
+                    <div class="toggle_dropdown relative">
+                        <div
+                            class="toggle_btn flex items-center gap-2 cursor-pointer"
+                        >
+                            <div class="toggle_btn_trigger text-right">
+                                <h4 class="toggle_btn_trigger font-semibold">
+                                    Admin
+                                </h4>
+                                <p class="toggle_btn_trigger text-sm">Admin</p>
+                            </div>
+
+                            <i
+                                class="bi bi-caret-down-fill toggle_btn_trigger"
+                            ></i>
+                        </div>
+
+                        <div
+                            class="toggle_dropdown_list min-w-[100px] absolute py-2 flex-col top-full right-0 hidden shadow-sm rounded"
+                        >
+                            <a href="" class="hover:bg-slate-50 px-3 py-1"
+                                >Profile</a
+                            >
+                            <a href="" class="hover:bg-slate-50 px-3 py-1"
+                                >Logout</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <main>
+                {% block content %}
+                    <!-- Content from child templates will go here -->
+                {% endblock %}
+            </main>
+    </div>
+
+        <!--======== main content ========-->
+        
+        
+        <script src="{% static 'js/main.js'%}"></script>
+
+        {% block extra_js %}
+<!-- Extra JavaScript files can be included by child templates -->
+{% endblock %}
+    </body>
+</html>
